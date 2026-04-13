@@ -2,39 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Aifaz Studio V4</title>
+<title>Aifaz Studio</title>
 
 <link rel="stylesheet" href="style.css">
-<script src="https://js.puter.com/v2/"></script>
 
+<script src="https://js.puter.com/v2/"></script>
 <script type="module" src="app.js"></script>
 </head>
 
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN -->
 <div id="loginScreen" class="center">
   <h2>🔐 Login Required</h2>
-  <button onclick="startApp()">Login with Google</button>
+  <button id="loginBtn">Login with Google</button>
 </div>
 
 <!-- APP -->
 <div id="app" style="display:none">
+  <h2>Welcome</h2>
+</div>
 
-  <div id="home" class="screen">
-    <textarea id="prompt" placeholder="Describe your app..."></textarea>
-
-    <select id="mode">
-      <option value="quick">Quick</option>
-      <option value="pro">Pro</option>
-      <option value="app">App</option>
-    </select>
-
-    <button onclick="generate()">Generate</button>
-
-    <div id="status"></div>
-  </div>
-
+</body>
+</html>
   <div id="generate" class="screen">
     <pre id="codeTab"></pre>
     <button onclick="copyCode()">Copy</button>
