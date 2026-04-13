@@ -1,32 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>AI React App Generator V2</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://js.puter.com/v2/"></script>
+<meta charset="UTF-8">
+<title>Aifaz Studio V4</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://js.puter.com/v2/"></script>
+
+<script type="module" src="app.js"></script>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>⚡ AI React App Generator</h1>
-    <p class="subtitle">Describe → Generate → Copy → Preview</p>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="center">
+  <h2>🔐 Login Required</h2>
+  <button onclick="startApp()">Login with Google</button>
+</div>
 
+<!-- APP -->
+<div id="app" style="display:none">
+
+  <div id="home" class="screen">
     <textarea id="prompt" placeholder="Describe your app..."></textarea>
 
-    <div class="buttons">
-      <button onclick="generate()">✨ Generate</button>
-      <button onclick="copyCode()">📋 Copy</button>
-      <button onclick="previewCode()">👁 Preview</button>
-    </div>
+    <select id="mode">
+      <option value="quick">Quick</option>
+      <option value="pro">Pro</option>
+      <option value="app">App</option>
+    </select>
+
+    <button onclick="generate()">Generate</button>
 
     <div id="status"></div>
-
-    <pre id="output"></pre>
-
-    <iframe id="preview"></iframe>
   </div>
 
-  <script src="app.js"></script>
+  <div id="generate" class="screen">
+    <pre id="codeTab"></pre>
+    <button onclick="copyCode()">Copy</button>
+    <button onclick="downloadCode()">Download</button>
+    <button onclick="fixCode()">Fix Code</button>
+  </div>
+
+  <div id="preview" class="screen">
+    <iframe id="previewFrame"></iframe>
+  </div>
+
+  <div id="files" class="screen">
+    <div id="history"></div>
+  </div>
+
+  <div id="settings" class="screen">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button onclick="switchTab('home')">🏠</button>
+    <button onclick="switchTab('generate')">⚡</button>
+    <button onclick="switchTab('preview')">👁</button>
+    <button onclick="switchTab('files')">📁</button>
+    <button onclick="switchTab('settings')">⚙️</button>
+  </div>
+
+</div>
+
 </body>
 </html>
