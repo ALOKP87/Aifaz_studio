@@ -1,40 +1,53 @@
-import { runAI } from "./ai.js";
 import { login } from "./auth.js";
 import { checkAccess } from "./guard.js";
 
-window.switchTab = function(tab){
-  document.querySelectorAll(".screen").forEach(e=>e.style.display="none");
-  document.getElementById(tab).style.display="block";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const auth = getAuth();
+
+// ✅ Bind button after load
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("loginBtn");
+
+  if (btn) {
+    btn.addEventListener("click", startApp);
+  }
+});
+
+// ✅ Login Flow
+async function startApp() {
+  try {
+    const user = await login();
+    if (!user) return;
+
+    const ok = await checkAccess();
+    if (!ok) return;
+
+    showApp();
+
+  } catch (e) {
+    alert("Login failed: " + e.message);
+  }
 }
 
-window.startApp = async function(){
-  const user = await login();
-  if(!user) return;
+// ✅ Auto login (important)
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const ok = await checkAccess();
+    if (ok) {
+      showApp();
+    }
+  }
+});
 
-  const ok = await checkAccess();
-  if(!ok) return;
-
-  document.getElementById("loginScreen").style.display="none";
-  document.getElementById("app").style.display="block";
-}
-
-const SYSTEM_PROMPT = `
-Return only clean code. No explanation.
-`;
-
-function buildPrompt(input,mode){
-  let extra="";
-  if(mode==="pro") extra="Better UI";
-  if(mode==="app") extra="Full app";
-
-  return SYSTEM_PROMPT + extra + input;
-}
-
-window.generate = async function(){
-  const input = document.getElementById("prompt").value;
-  const mode = document.getElementById("mode").value;
-
-  document.getElementById("status").innerText="Generating...";
+// ✅ Show App
+function showApp() {
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}  document.getElementById("status").innerText="Generating...";
 
   const code = await runAI(buildPrompt(input,mode));
 
