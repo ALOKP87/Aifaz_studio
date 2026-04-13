@@ -2,50 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>⚡ AI React Builder</title>
+  <title>AI React App Generator V2</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://js.puter.com/v2/"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="app-wrapper">
-    <header class="header">
-      <h1>⚡ AI React App Generator</h1>
-      <p class="subtitle">Describe your idea → Get production-ready React code</p>
-    </header>
 
-    <main class="generator">
-      <div class="input-section">
-        <label for="prompt" class="sr-only">App description</label>
-        <textarea 
-          id="prompt" 
-          placeholder="E.g., 'A todo app with dark mode, drag-and-drop, and local storage persistence'..."
-          aria-describedby="prompt-hint"
-        ></textarea>
-        <small id="prompt-hint" class="hint">Be specific about features, styling, and data flow for best results.</small>
-      </div>
+  <div class="container">
+    <h1>⚡ AI React App Generator</h1>
+    <p class="subtitle">Describe → Generate → Copy → Preview</p>
 
-      <button id="generateBtn" class="btn-primary" aria-busy="false">
-        <span class="btn-text">Generate Code ✨</span>
-        <span class="btn-loader" hidden>Generating...</span>
-      </button>
+    <textarea id="prompt" placeholder="Describe your app..."></textarea>
 
-      <div id="status" class="status" role="status" aria-live="polite"></div>
+    <div class="buttons">
+      <button onclick="generate()">✨ Generate</button>
+      <button onclick="copyCode()">📋 Copy</button>
+      <button onclick="previewCode()">👁 Preview</button>
+    </div>
 
-      <section class="output-section" hidden>
-        <div class="output-header">
-          <h2>Generated Code</h2>
-          <button id="copyBtn" class="btn-secondary">Copy Code 📋</button>
-        </div>
-        <pre id="output" class="code-block"><code></code></pre>
-      </section>
-    </main>
+    <div id="status"></div>
 
-    <footer class="footer">
-      <p>Powered by <a href="https://puter.com" target="_blank" rel="noopener">Puter.ai</a> • Built for developers</p>
-    </footer>
+    <pre id="output"></pre>
+
+    <iframe id="preview"></iframe>
   </div>
 
   <script src="app.js"></script>
